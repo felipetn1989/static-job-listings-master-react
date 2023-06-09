@@ -25,29 +25,39 @@ export default function Listing() {
   }, []);
 
   return (
-    <main>
+    <main className="grid pt-14 px-6 bg-[#effafa]">
       {jobs.map((job) => (
-        <div key={job.id}>
-          <img src={job.logo} alt={`${job.company} logo`} />
+        <div key={job.id} className="relative bg-white rounded-lg">
+          {job.featured && <div className="absolute h-full w-1 bg-[#5ba4a4] rounded-l-lg"></div>}
+          <img className="w-12" src={job.logo} alt={`${job.company} logo`} />
           <div className="flex">
             <h1>{job.company}</h1>
             {job.new && <span className="uppercase">new</span>}
             {job.featured && <span className="uppercase">featured</span>}
           </div>
-          <p>{job.position}</p>
+          <p className="text-[#2c3a3a]">{job.position}</p>
           <div>
             <span>{job.postedAt}</span>
             <span>{job.contract}</span>
             <span>{job.location}</span>
           </div>
-          <span>{job.role}</span>
-          <span>{job.level}</span>
+          <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
+            {job.role}
+          </span>
+          <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
+            {job.level}
+          </span>
           {job.languages.map((language) => (
-            <span>{language}</span>
+            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
+              {language}
+            </span>
           ))}
-          {job.tools.length !== 0 && job.tools.map((tool) => (
-            <span>{tool}</span>
-          ))}
+          {job.tools &&
+            job.tools.map((tool) => (
+              <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
+                {tool}
+              </span>
+            ))}
         </div>
       ))}
     </main>
