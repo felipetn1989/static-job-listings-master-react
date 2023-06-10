@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import FilterBox from "./FilterBox";
+
 export default function Listing() {
   const [jobs, setJobs] = useState([]);
   const [allJobs, setAllJobs] = useState([]);
@@ -24,36 +26,91 @@ export default function Listing() {
     fetchData();
   }, []);
 
+  function filterJobs(e) {
+    const filter = e.target.innerText;
+
+    if (!filterTags.includes(filter)) {
+      setFilterTags([...filterTags, e.target.innerText]);
+    }
+  }
+
+  function clearAllFilters() {
+    setJobs(allJobs);
+    setFilterTags([]);
+  }
+
+  function removeFilter(tagName) {
+    setFilterTags(filterTags.filter((tag) => tag !== tagName));
+    console.log(filterTags);
+  }
+
+  useEffect(
+    () =>
+      setJobs(
+        allJobs.filter((job) =>
+          filterTags.every((tag) =>
+            [job.role, job.level, ...job.languages, ...job.tools].includes(tag)
+          )
+        )
+      ),
+    [filterTags, allJobs]
+  );
+
   return (
     <main className="grid gap-10 pt-14 px-6 bg-[#effafa]">
+      {filterTags.length > 0 && (
+        <FilterBox
+          tags={filterTags}
+          clearAll={clearAllFilters}
+          clearFilter={removeFilter}
+        />
+      )}
       {jobs.map((job) => (
         <div
           key={job.id}
-          className="relative grid gap-2.5 bg-white rounded-lg pt-8 pb-6 px-6 shadow-md"
+          className="relative grid gap-2.5 bg-white rounded-lg pt-8 pb-6 px-6 shadow-md lg:w-[90%] lg:max-w-[69.5rem] lg:m-auto lg:flex lg:justify-between lg:items-center lg:mt-5 lg:pb-[unset] lg:pt-[unset] lg:px-5"
         >
           {job.featured && (
             <div className="absolute h-full top-0 left-0 w-1 bg-[#5ba4a4] rounded-l-lg"></div>
           )}
-          <img
-            className="absolute top-[-1.5rem] left-6 w-12"
-            src={job.logo}
-            alt={`${job.company} logo`}
-          />
-          <div className="flex gap-6 items-center">
-            <h1 className="text-[#5ba4a4] font-bold tracking-tight">
-              {job.company}
-            </h1>
-            <div className="flex gap-2.5">
-              {job.new && (
-                <span className="uppercase bg-[#5ba4a4] text-white text-sm py-0.5 px-2 rounded-full">
-                  new!
+          <div className="lg:flex lg:items-center lg:gap-11">
+            <img
+              className="absolute top-[-1.5rem] left-6 w-12 lg:relative lg:w-[5.5rem] lg:top-[unset]"
+              src={job.logo}
+              alt={`${job.company} logo`}
+            />
+            <div className="grid gap-2.5">
+              <div className="flex gap-6 items-center">
+                <h1 className="text-[#5ba4a4] font-bold tracking-tight lg:text-lg">
+                  {job.company}
+                </h1>
+                <div className="flex gap-2.5">
+                  {job.new && (
+                    <span className="uppercase bg-[#5ba4a4] text-white text-sm py-0.5 px-2 rounded-full">
+                      new!
+                    </span>
+                  )}
+                  {job.featured && (
+                    <span className="uppercase bg-[#2c3a3a] text-white text-sm py-0.5 px-2 rounded-full">
+                      featured
+                    </span>
+                  )}
+                </div>
+              </div>
+              <p className="text-[#2c3a3a] font-bold tracking-tight hover:text-[#5ba4a4] hover:cursor-pointer lg:text-xl">
+                {job.position}
+              </p>
+              <div className="flex gap-2.5 items-center text-[#7b8e8e] mt-[-0.25rem] border-b border-[#7b8e8e] pb-4 lg:border-b-0 lg:pb-[unset] lg:text-lg">
+                <span>{job.postedAt}</span>
+                <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
+                <span>{job.contract}</span>
+                <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
+                <span className="ml-[-0.25rem]">
+                  {job.location.replace(/(?<=\s)\S/g, (match) =>
+                    match.toLowerCase()
+                  )}
                 </span>
-              )}
-              {job.featured && (
-                <span className="uppercase bg-[#2c3a3a] text-white text-sm py-0.5 px-2 rounded-full">
-                  featured
-                </span>
-              )}
+              </div>
             </div>
           </div>
           <p className="text-[#2c3a3a] font-bold tracking-tight hover:text-[#5ba4a4] hover:cursor-pointer">{job.position}</p>
