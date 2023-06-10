@@ -57,7 +57,7 @@ export default function Listing() {
   );
 
   return (
-    <main className="grid gap-10 pt-14 px-6 bg-[#effafa]">
+    <main className="grid gap-10 pt-14 px-6 mb-8 bg-[#effafa] lg:gap-[0.3125rem]">
       {filterTags.length > 0 && (
         <FilterBox
           tags={filterTags}
@@ -68,10 +68,10 @@ export default function Listing() {
       {jobs.map((job) => (
         <div
           key={job.id}
-          className="relative grid gap-2.5 bg-white rounded-lg pt-8 pb-6 px-6 shadow-md lg:w-[90%] lg:max-w-[69.5rem] lg:m-auto lg:flex lg:justify-between lg:items-center lg:mt-5 lg:pb-[unset] lg:pt-[unset] lg:px-5"
+          className="relative grid gap-2.5 bg-white rounded-lg pt-8 pb-6 px-6 shadow-md lg:w-[90%] lg:max-w-[69.5rem] lg:m-auto lg:flex lg:justify-between lg:items-center lg:mt-5 lg:px-4 lg:py-7"
         >
           {job.featured && (
-            <div className="absolute h-full top-0 left-0 w-1 bg-[#5ba4a4] rounded-l-lg"></div>
+            <div className="absolute h-full top-0 left-0 w-1 bg-[#5ba4a4] rounded-l-lg lg:w-1.5"></div>
           )}
           <div className="lg:flex lg:items-center lg:gap-12">
             <img
@@ -79,8 +79,8 @@ export default function Listing() {
               src={job.logo}
               alt={`${job.company} logo`}
             />
-            <div className="grid gap-2.5">
-              <div className="flex gap-6 items-center">
+            <div className="grid gap-2.5 lg:gap-2">
+              <div className="flex gap-6 items-center lg:gap-5">
                 <h1 className="text-[#5ba4a4] font-bold tracking-tight lg:text-lg">
                   {job.company}
                 </h1>
@@ -97,10 +97,10 @@ export default function Listing() {
                   )}
                 </div>
               </div>
-              <p className="text-[#2c3a3a] font-bold tracking-tight hover:text-[#5ba4a4] hover:cursor-pointer lg:text-xl">
+              <p className="text-[#2c3a3a] font-bold tracking-tight hover:text-[#5ba4a4] hover:cursor-pointer lg:text-xl lg:tracking-wider">
                 {job.position}
               </p>
-              <div className="flex gap-2.5 items-center text-[#7b8e8e] mt-[-0.25rem] border-b border-[#7b8e8e] pb-4 lg:border-b-0 lg:pb-[unset] lg:text-lg">
+              <div className="flex gap-2.5 items-center text-[#7b8e8e] mt-[-0.25rem] border-b border-[#7b8e8e] pb-4 lg:border-b-0 lg:pb-[unset] lg:text-lg lg:gap-[1.125rem] lg:mt-[-0.3125rem]">
                 <span>{job.postedAt}</span>
                 <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
                 <span>{job.contract}</span>
@@ -113,7 +113,7 @@ export default function Listing() {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap mt-1.5 gap-x-[1.125rem] gap-y-4">
+          <div className="flex flex-wrap mt-1.5 gap-x-[1.125rem] gap-y-4 lg:translate-x-[-1.3175rem] lg:mt-0">
             <span
               className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-[#5ba4a4]"
               onClick={filterJobs}
