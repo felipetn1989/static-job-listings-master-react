@@ -56,7 +56,7 @@ export default function Listing() {
               )}
             </div>
           </div>
-          <p className="text-[#2c3a3a]">{job.position}</p>
+          <p className="text-[#2c3a3a] font-bold tracking-tight hover:text-[#5ba4a4] hover:cursor-pointer">{job.position}</p>
           <div className="flex gap-2.5 items-center text-[#7b8e8e] mt-[-0.25rem] border-b border-[#7b8e8e] pb-4">
             <span>{job.postedAt}</span>
             <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
@@ -69,20 +69,20 @@ export default function Listing() {
             </span>
           </div>
           <div className="flex flex-wrap mt-1.5 gap-x-[1.125rem] gap-y-4">
-            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-[#5ba4a4]">
               {job.role}
             </span>
-            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-[#5ba4a4]">
               {job.level}
             </span>
             {job.languages.map((language) => (
-              <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+              <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-[#5ba4a4]">
                 {language}
               </span>
             ))}
             {job.tools &&
               job.tools.map((tool) => (
-                <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+                <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-[#5ba4a4]">
                   {tool}
                 </span>
               ))}
