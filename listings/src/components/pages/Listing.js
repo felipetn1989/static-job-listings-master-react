@@ -42,7 +42,6 @@ export default function Listing() {
 
   function removeFilter(tagName) {
     setFilterTags(filterTags.filter((tag) => tag !== tagName));
-    console.log(filterTags);
   }
 
   useEffect(

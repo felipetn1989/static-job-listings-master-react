@@ -2,7 +2,7 @@ import closeIcon from "../images/icon-remove.svg";
 
 export default function FilterBox({ tags, clearAll, clearFilter }) {
   return (
-    <div className="flex justify-between items-center bg-white p-5 rounded-md mt-[-5.75rem] mb-4">
+    <div className="flex justify-between items-center bg-white p-5 rounded-md mt-[-5.75rem] mb-4 lg:w-[90%] lg:max-w-[69.5rem] lg:m-auto">
       <div className="flex flex-wrap gap-x-4 gap-y-4">
         {tags.map((tag, index) => (
           <div key={index} className="flex items-center">
