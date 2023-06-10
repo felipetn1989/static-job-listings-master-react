@@ -25,39 +25,68 @@ export default function Listing() {
   }, []);
 
   return (
-    <main className="grid pt-14 px-6 bg-[#effafa]">
+    <main className="grid gap-10 pt-14 px-6 bg-[#effafa]">
       {jobs.map((job) => (
-        <div key={job.id} className="relative bg-white rounded-lg">
-          {job.featured && <div className="absolute h-full w-1 bg-[#5ba4a4] rounded-l-lg"></div>}
-          <img className="w-12" src={job.logo} alt={`${job.company} logo`} />
-          <div className="flex">
-            <h1>{job.company}</h1>
-            {job.new && <span className="uppercase">new</span>}
-            {job.featured && <span className="uppercase">featured</span>}
+        <div
+          key={job.id}
+          className="relative grid gap-2.5 bg-white rounded-lg pt-8 pb-6 px-6 shadow-md"
+        >
+          {job.featured && (
+            <div className="absolute h-full top-0 left-0 w-1 bg-[#5ba4a4] rounded-l-lg"></div>
+          )}
+          <img
+            className="absolute top-[-1.5rem] left-6 w-12"
+            src={job.logo}
+            alt={`${job.company} logo`}
+          />
+          <div className="flex gap-6 items-center">
+            <h1 className="text-[#5ba4a4] font-bold tracking-tight">
+              {job.company}
+            </h1>
+            <div className="flex gap-2.5">
+              {job.new && (
+                <span className="uppercase bg-[#5ba4a4] text-white text-sm py-0.5 px-2 rounded-full">
+                  new!
+                </span>
+              )}
+              {job.featured && (
+                <span className="uppercase bg-[#2c3a3a] text-white text-sm py-0.5 px-2 rounded-full">
+                  featured
+                </span>
+              )}
+            </div>
           </div>
           <p className="text-[#2c3a3a]">{job.position}</p>
-          <div>
+          <div className="flex gap-2.5 items-center text-[#7b8e8e] mt-[-0.25rem] border-b border-[#7b8e8e] pb-4">
             <span>{job.postedAt}</span>
+            <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
             <span>{job.contract}</span>
-            <span>{job.location}</span>
-          </div>
-          <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
-            {job.role}
-          </span>
-          <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
-            {job.level}
-          </span>
-          {job.languages.map((language) => (
-            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
-              {language}
+            <div className="bg-[#7b8e8e] w-1 h-1 rounded-full"></div>
+            <span className="ml-[-0.25rem]">
+              {job.location.replace(/(?<=\s)\S/g, (match) =>
+                match.toLowerCase()
+              )}
             </span>
-          ))}
-          {job.tools &&
-            job.tools.map((tool) => (
-              <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold">
-                {tool}
+          </div>
+          <div className="flex flex-wrap mt-1.5 gap-x-[1.125rem] gap-y-4">
+            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+              {job.role}
+            </span>
+            <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+              {job.level}
+            </span>
+            {job.languages.map((language) => (
+              <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+                {language}
               </span>
             ))}
+            {job.tools &&
+              job.tools.map((tool) => (
+                <span className="bg-[#eef6f6] text-[#5ba4a4] font-bold px-2 py-1 rounded-lg">
+                  {tool}
+                </span>
+              ))}
+          </div>
         </div>
       ))}
     </main>
